@@ -1,0 +1,14 @@
+find_package(Qt5 COMPONENTS Core Widgets Gui REQUIRED) 
+find_package(OpenCV COMPONENTS core REQUIRED)
+
+set(IMG_PROCESS_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "View include dir")
+include_directories(${OpenCV_INCLUDE_DIRS} ${IMG_PROCESS_INCLUDE_DIR})
+
+file(GLOB IMG_PROCESS_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
+file(GLOB IMG_PROCESS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+
+qt5_wrap_cpp(IMG_PROCESS_WRAPPED_HEADERS ${IMG_PROCESS_HEADERS})
+
+add_library(ImgProcess ${IMG_PROCESS_SOURCES} ${IMG_PROCESS_HEADERS} ${IMG_PROCESS_WRAPPED_HEADERS})
+target_link_libraries(ImgProcess Qt5::Core Qt5::Widgets Qt5::Gui ${OpenCV_LIBRARIES}) 
+ 
