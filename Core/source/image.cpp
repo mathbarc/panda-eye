@@ -11,7 +11,7 @@ Image::Image(QString path)
     cv::Mat img = cv::imread(path.toStdString());
 
 
-    this->thumbnail = QPixmap::fromImage(cvMatToQImage(utils::resizeSquarred(img, Media::thumbnailSize)));
+    this->thumbnail = QPixmap::fromImage(utils::cvMatToQImage(utils::resizeSquarred(img, Media::thumbnailSize)));
 
 }
 

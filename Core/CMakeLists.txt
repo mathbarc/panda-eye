@@ -1,5 +1,5 @@
 find_package(Qt5 COMPONENTS Core Widgets Gui REQUIRED) 
-find_package(OpenCV COMPONENTS core imgcodecs REQUIRED)
+find_package(OpenCV COMPONENTS core imgcodecs videoio REQUIRED)
 
 set(CORE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "View include dir")
 include_directories(${OpenCV_INCLUDE_DIRS} ${CORE_INCLUDE_DIR})

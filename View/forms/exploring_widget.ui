@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>540</height>
+    <width>951</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -135,7 +135,7 @@
         <number>100</number>
        </property>
        <property name="wordWrap">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="itemAlignment">
         <set>Qt::AlignAbsolute|Qt::AlignBaseline|Qt::AlignBottom|Qt::AlignCenter|Qt::AlignHCenter|Qt::AlignHorizontal_Mask|Qt::AlignJustify|Qt::AlignLeading|Qt::AlignLeft|Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing|Qt::AlignVCenter|Qt::AlignVertical_Mask</set>
@@ -143,18 +143,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <widget class="QWidget" name="tab">
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Tab 2</string>
-        </attribute>
-       </widget>
-      </widget>
+      <widget class="QTabWidget" name="tabWidget"/>
      </item>
     </layout>
    </item>

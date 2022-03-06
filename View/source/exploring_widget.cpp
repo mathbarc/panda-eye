@@ -2,6 +2,8 @@
 #include "ui_exploring_widget.h"
 
 #include <QFileSystemModel>
+#include <QStyle>
+
 #include "media_item_model.hpp"
 #include "media_cache.hpp"
 
@@ -20,9 +22,6 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
     this->ui->treeView->hideColumn(2);
     this->ui->treeView->hideColumn(3);
     this->ui->treeView->setCurrentIndex(model->index(QDir::currentPath()));
-
-
-//    this->ui->listView->setViewMode(QListView::IconMode);
 
     MediaItemModel* mediaModel = new MediaItemModel();
     this->ui->listView->setModel(mediaModel);

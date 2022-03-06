@@ -17,19 +17,4 @@ class Image : public Media
         QPixmap thumbnail;
 };
 
-inline QImage cvMatToQImage(const cv::Mat& inputImg)
-{
-    QImage img;
-
-    if(inputImg.channels()==3)
-    {
-        img = QImage(inputImg.ptr(), inputImg.cols, inputImg.rows, inputImg.step, QImage::Format_RGB888);
-        img = img.rgbSwapped();
-    }
-    else
-        img = QImage(inputImg.ptr(), inputImg.cols, inputImg.rows, inputImg.step, QImage::Format_Mono);
-
-    return img;
-}
-
 #endif // IMAGE_HPP

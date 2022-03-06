@@ -1,5 +1,6 @@
 #include "media.hpp"
 #include "image.hpp"
+#include "video.hpp"
 
 #include <QFileInfo>
 
@@ -18,6 +19,10 @@ Media* Media::makeMedia(QString path)
     if(Image::filters.contains("*."+info.suffix()))
     {
         return new Image(path);
+    }
+    if(Video::filters.contains("*."+info.suffix()))
+    {
+        return new Video(path);
     }
 }
 

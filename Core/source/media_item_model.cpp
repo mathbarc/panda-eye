@@ -1,11 +1,13 @@
 #include "media_item_model.hpp"
-#include "image.hpp"
 #include <QDir>
 #include <iostream>
 
 #include <QFileSystemModel>
 
 #include "media_cache.hpp"
+
+#include "image.hpp"
+#include "video.hpp"
 
 MediaItemModel::MediaItemModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -61,14 +63,18 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
 
-    /*if(role == Qt::DisplayRole)
-    {
-        QFileInfo info(this->paths[index.row()]);
-        return info.fileName();
-    }
-    else*/ if(role == Qt::DecorationRole)
+
+    if(role == Qt::DecorationRole)
     {
         return MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
+    }
+    else if(role == MediaItemModel::FilePathRole)
+    {
+        return this->paths[index.row()];
+    }
+    else if(role == MediaItemModel::FileTypeRole)
+    {
+        return int(MediaCache::getInstance()->at(this->paths[index.row()])->getType());
     }
     else return QVariant();
 
@@ -108,7 +114,7 @@ bool MediaItemModel::removeColumns(int column, int count, const QModelIndex &par
 void MediaItemModel::setCurrentDir(const QString& dir)
 {
     QDir directory(dir);
-    QStringList newPaths = directory.entryList(Image::filters, QDir::Files);
+    QStringList newPaths = directory.entryList(Image::filters+Video::filters, QDir::Files);
     for(QString& filePath: newPaths)
     {
         filePath = dir+QDir::separator()+filePath;

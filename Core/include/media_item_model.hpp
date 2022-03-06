@@ -8,6 +8,14 @@ class MediaItemModel : public QAbstractItemModel
         Q_OBJECT
 
     public:
+
+
+        enum Roles
+        {
+            FilePathRole = 0x0100,
+            FileTypeRole = 0x0101
+        };
+
         explicit MediaItemModel(QObject *parent = nullptr);
 
 
