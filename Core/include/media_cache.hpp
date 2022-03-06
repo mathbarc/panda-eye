@@ -13,6 +13,7 @@ class MediaCache
         Media* at(const QString path);
 
         static QSharedPointer<MediaCache> getInstance();
+        static void setThumbnailsSize(int size);
 
     private:
         QCache< QString, Media> mediaCache;

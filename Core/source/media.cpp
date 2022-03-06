@@ -3,6 +3,9 @@
 
 #include <QFileInfo>
 
+
+int Media::thumbnailSize = 200;
+
 Media::Media()
 {
 
@@ -16,4 +19,9 @@ Media* Media::makeMedia(QString path)
     {
         return new Image(path);
     }
+}
+
+void Media::setThumnailSize(int size)
+{
+    Media::thumbnailSize = size;
 }

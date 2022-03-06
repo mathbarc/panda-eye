@@ -60,16 +60,17 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    Media* media;
-    switch (role)
+
+    /*if(role == Qt::DisplayRole)
     {
-        case Qt::DisplayRole:
-            return this->paths[index.row()];
-        case Qt::DecorationRole:
-            return MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
-        default:
-            return QVariant();
+        QFileInfo info(this->paths[index.row()]);
+        return info.fileName();
     }
+    else*/ if(role == Qt::DecorationRole)
+    {
+        return MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
+    }
+    else return QVariant();
 
 }
 
@@ -119,24 +120,41 @@ void MediaItemModel::setCurrentDir(const QString& dir)
 
     if(diff < 0)
     {
-        emit removeRows(this->paths.size(), std::abs(diff));
+        QAbstractItemModel::removeRows(this->paths.size(), std::abs(diff));
     }
 
     this->paths = newPaths;
 
     if(diff > 0)
     {
-        emit insertRows(this->paths.size(), diff);
+        QAbstractItemModel::insertRows(this->paths.size(), diff);
     }
 
     QModelIndex start = this->index(0,0);
     QModelIndex end = this->index(this->rowCount(), this->columnCount());
 
-    emit dataChanged(start, end);
+    QAbstractItemModel::dataChanged(start, end);
 
 }
 
 void MediaItemModel::setCurrentDir(const QModelIndex& index)
 {
     this->setCurrentDir(index.data(QFileSystemModel::FilePathRole).toString());
+}
+
+
+bool MediaItemModel::hasChildren(const QModelIndex &parent) const
+{
+    // FIXME: Implement me!
+}
+
+bool MediaItemModel::canFetchMore(const QModelIndex &parent) const
+{
+    // FIXME: Implement me!
+    return false;
+}
+
+void MediaItemModel::fetchMore(const QModelIndex &parent)
+{
+    // FIXME: Implement me!
 }

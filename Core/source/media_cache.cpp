@@ -31,3 +31,10 @@ QSharedPointer<MediaCache> MediaCache::getInstance()
     return MediaCache::instance;
 
 }
+
+void MediaCache::setThumbnailsSize(int size)
+{
+    Media::setThumnailSize(size);
+    if(!MediaCache::instance.isNull())
+        MediaCache::instance->mediaCache.clear();
+}

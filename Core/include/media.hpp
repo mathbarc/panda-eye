@@ -17,6 +17,12 @@ class Media
         virtual QPixmap getThumbnail() = 0;
         virtual MediaType getType() = 0;
 
+        static void setThumnailSize(int size);
+
+    protected:
+
+        static int thumbnailSize;
+
 };
 
 #endif // MEDIA_HPP

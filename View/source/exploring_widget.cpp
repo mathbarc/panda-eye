@@ -3,6 +3,7 @@
 
 #include <QFileSystemModel>
 #include "media_item_model.hpp"
+#include "media_cache.hpp"
 
 ExploringWidget::ExploringWidget(QWidget *parent) :
     QWidget(parent),
@@ -21,12 +22,13 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
     this->ui->treeView->setCurrentIndex(model->index(QDir::currentPath()));
 
 
+//    this->ui->listView->setViewMode(QListView::IconMode);
+
     MediaItemModel* mediaModel = new MediaItemModel();
     this->ui->listView->setModel(mediaModel);
     mediaModel->setCurrentDir(QDir::currentPath());
 
     connect(this->ui->treeView, SIGNAL(clicked(QModelIndex)), mediaModel, SLOT(setCurrentDir(QModelIndex)));
-//    this->ui->listView->setViewMode(QListView::IconMode);
     this->ui->listView->setResizeMode(QListView::Adjust);
 
 }
@@ -34,4 +36,10 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
 ExploringWidget::~ExploringWidget()
 {
     delete ui;
+}
+
+void ExploringWidget::on_horizontalSlider_valueChanged(int value)
+{
+    MediaCache::setThumbnailsSize(value);
+    this->ui->listView->reset();
 }

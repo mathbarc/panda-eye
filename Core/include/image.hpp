@@ -12,6 +12,7 @@ class Image : public Media
         virtual QPixmap getThumbnail();
         virtual MediaType getType();
         static const QStringList filters;
+
     private:
         QPixmap thumbnail;
 };

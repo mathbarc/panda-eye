@@ -15,7 +15,10 @@ class ExploringWidget : public QWidget
         explicit ExploringWidget(QWidget *parent = nullptr);
         ~ExploringWidget();
 
-    private:
+private slots:
+    void on_horizontalSlider_valueChanged(int value);
+
+private:
         Ui::ExploringWidget *ui;
 };
 
