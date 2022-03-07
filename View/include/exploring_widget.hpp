@@ -15,8 +15,16 @@ class ExploringWidget : public QWidget
         explicit ExploringWidget(QWidget *parent = nullptr);
         ~ExploringWidget();
 
-private slots:
-    void on_horizontalSlider_valueChanged(int value);
+    signals:
+        void openImage(QString path);
+        void openVideo(QString path);
+
+    private slots:
+        void on_horizontalSlider_valueChanged(int value);
+
+
+
+        void on_listView_doubleClicked(const QModelIndex &index);
 
 private:
         Ui::ExploringWidget *ui;

@@ -15,9 +15,15 @@ class MainWindow : public QMainWindow
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
+    private slots:
+        void openImage(const QString& path);
+        void openVideo(const QString& path);
 
 
-    private:
+
+        void on_tabWidget_tabCloseRequested(int index);
+
+private:
         Ui::MainWindow *ui;
 
 };

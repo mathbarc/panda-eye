@@ -20,13 +20,16 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab_1">
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab_exploring">
        <attribute name="title">
         <string>Explore</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="ExploringWidget" name="widget" native="true"/>
+         <widget class="ExploringWidget" name="exploring_widget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -40,7 +43,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

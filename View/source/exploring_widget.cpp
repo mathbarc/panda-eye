@@ -51,3 +51,18 @@ void ExploringWidget::on_horizontalSlider_valueChanged(int value)
     MediaCache::setThumbnailsSize(value);
     this->ui->listView->reset();
 }
+
+void ExploringWidget::on_listView_doubleClicked(const QModelIndex &index)
+{
+
+    QString path = index.data(MediaItemModel::FilePathRole).toString();
+
+    if(index.data(MediaItemModel::FileTypeRole).toInt() == int(MediaType::Image))
+    {
+        emit openImage(path);
+    }
+    else if(index.data(MediaItemModel::FileTypeRole).toInt() == int(MediaType::Video))
+    {
+        emit openVideo(path);
+    }
+}
