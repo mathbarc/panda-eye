@@ -16,6 +16,8 @@ ImageViewWidget::ImageViewWidget(QWidget *parent) :
 
 ImageViewWidget::~ImageViewWidget()
 {
+    this->ui->graphicsView->scene()->clear();
+
     delete ui;
 }
 

@@ -35,7 +35,8 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
 {
     if(index!=0)
     {
-        this->ui->tabWidget->widget(index)->deleteLater();
+        QWidget* wid = this->ui->tabWidget->widget(index);
         this->ui->tabWidget->removeTab(index);
+        delete wid;
     }
 }
