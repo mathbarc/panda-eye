@@ -22,8 +22,8 @@ void MainWindow::openImage(const QString& path)
 
     ImageViewWidget* imgView = new ImageViewWidget();
     this->ui->tabWidget->addTab(imgView, path);
-    imgView->setImage(path);
     this->ui->tabWidget->setCurrentWidget(imgView);
+    imgView->setImage(path);
 }
 
 void MainWindow::openVideo(const QString& path)

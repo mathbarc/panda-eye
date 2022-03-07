@@ -18,7 +18,7 @@ namespace utils
         }
         else
         {
-            int col = std::max((int)std::round(size/aspectRatio),1);
+            int col = std::max((int)std::round(size*aspectRatio),1);
 
             cv::resize(img, resized, cv::Size(col, size));
             return resized;

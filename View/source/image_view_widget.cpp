@@ -3,6 +3,8 @@
 #include "utils.hpp"
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs/imgcodecs.hpp>
 
@@ -32,5 +34,6 @@ void ImageViewWidget::setImage(const QString& path)
 void ImageViewWidget::setImageOnScene(const QPixmap& pixmap)
 {
     this->ui->graphicsView->scene()->clear();
-    this->ui->graphicsView->scene()->addPixmap(pixmap);
+    QGraphicsPixmapItem* item = this->ui->graphicsView->scene()->addPixmap(pixmap);
+    this->ui->graphicsView->fitInView(dynamic_cast<QGraphicsItem*>(item),Qt::KeepAspectRatio);
 }
