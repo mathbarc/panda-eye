@@ -9,7 +9,7 @@ class Image : public Media
 {
     public:
         Image(QString path);
-        virtual QPixmap getThumbnail();
+        virtual const QPixmap& getThumbnail();
         virtual MediaType getType();
         static const QStringList filters;
 

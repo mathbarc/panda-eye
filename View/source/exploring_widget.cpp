@@ -2,6 +2,7 @@
 #include "ui_exploring_widget.h"
 
 #include <QFileSystemModel>
+#include <QSortFilterProxyModel>
 #include <QStyle>
 
 #include "media_item_model.hpp"
@@ -15,17 +16,25 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
 
 
     QFileSystemModel* model = new QFileSystemModel();
+    QSortFilterProxyModel* sortedModel = new QSortFilterProxyModel();
+    sortedModel->setSourceModel(model);
+
     model->setRootPath(QDir::currentPath());
     model->setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
-    this->ui->treeView->setModel(model);
+
+
+    this->ui->treeView->setModel(sortedModel);
     this->ui->treeView->hideColumn(1);
     this->ui->treeView->hideColumn(2);
     this->ui->treeView->hideColumn(3);
-    this->ui->treeView->setCurrentIndex(model->index(QDir::currentPath()));
+    this->ui->treeView->setCurrentIndex(sortedModel->mapFromSource(model->index(QDir::currentPath())));
 
     MediaItemModel* mediaModel = new MediaItemModel();
     this->ui->listView->setModel(mediaModel);
     mediaModel->setCurrentDir(QDir::currentPath());
+
+    sortedModel->sort(0, Qt::AscendingOrder);
+
 
     connect(this->ui->treeView, SIGNAL(clicked(QModelIndex)), mediaModel, SLOT(setCurrentDir(QModelIndex)));
     this->ui->listView->setResizeMode(QListView::Adjust);

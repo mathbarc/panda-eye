@@ -10,13 +10,12 @@ class Video : public Media
 {
 public:
     Video(QString filePath);
-    virtual QPixmap getThumbnail();
+    virtual const QPixmap& getThumbnail();
     virtual MediaType getType();
     static const QStringList filters;
 
 private:
     QPixmap thumbnail;
-    cv::VideoCapture video;
 };
 
 #endif // VIDEO_HPP

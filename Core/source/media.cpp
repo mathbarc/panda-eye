@@ -7,7 +7,8 @@
 
 int Media::thumbnailSize = 200;
 
-Media::Media()
+Media::Media(const std::string path)
+    : path(path)
 {
 
 }

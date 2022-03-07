@@ -12,15 +12,15 @@ enum class MediaType
 class Media
 {
     public:
-        Media();
+        Media(const std::string path);
         static Media* makeMedia(QString path);
-        virtual QPixmap getThumbnail() = 0;
+        virtual const QPixmap& getThumbnail() = 0;
         virtual MediaType getType() = 0;
 
         static void setThumnailSize(int size);
 
     protected:
-
+        const std::string path;
         static int thumbnailSize;
 
 };

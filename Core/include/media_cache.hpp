@@ -18,7 +18,7 @@ class MediaCache
     private:
         QCache< QString, Media> mediaCache;
 
-        MediaCache(int maxSize=100);
+        MediaCache(int maxSize=200);
 
         static QSharedPointer<MediaCache> instance;
 

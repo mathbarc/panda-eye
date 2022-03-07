@@ -66,7 +66,8 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::DecorationRole)
     {
-        return MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
+        const QPixmap& thumbnail = MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
+        return thumbnail;
     }
     else if(role == MediaItemModel::FilePathRole)
     {
