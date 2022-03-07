@@ -13,7 +13,7 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
     ui(new Ui::ExploringWidget)
 {
     ui->setupUi(this);
-
+    this->ui->tabWidget->setHidden(true);
 
     QFileSystemModel* model = new QFileSystemModel();
     QSortFilterProxyModel* sortedModel = new QSortFilterProxyModel();
