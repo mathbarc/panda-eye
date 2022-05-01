@@ -20,7 +20,8 @@ Media* MediaCache::at(const QString path)
         return mediaCache[path];
 
     Media* media =  Media::makeMedia(path);
-    this->mediaCache.insert(path, media);
+    if(media != nullptr)
+        this->mediaCache.insert(path, media);
     return media;
 }
 

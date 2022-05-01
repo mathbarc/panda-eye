@@ -26,7 +26,26 @@ ImageViewWidget::~ImageViewWidget()
 
 void ImageViewWidget::setImage(const QString& path)
 {
-    QImage img = utils::cvMatToQImage(cv::imread(path.toStdString()));
+    cv::Mat mat;
+    if(path.contains(".tiff"))
+    {
+        cv::Mat originalImg = cv::imread(path.toStdString(), cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
+
+        if(originalImg.type() == CV_32FC3)
+            originalImg.convertTo(mat, CV_8UC3);
+        else if(originalImg.type() == CV_32F)
+        {
+            double min, max;
+            cv::minMaxIdx(originalImg, &min, &max);
+            originalImg.convertTo(mat, CV_8U, 255./(max-min), 255.*(-min)/(max-min));
+        }
+        else
+            mat = originalImg;
+
+    }
+    else mat = cv::imread(path.toStdString());
+
+    QImage img = utils::cvMatToQImage(mat);
 
     this->setImageOnScene(QPixmap::fromImage(img));
 }

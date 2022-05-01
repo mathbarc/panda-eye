@@ -1,7 +1,7 @@
 #ifndef MEDIAITEMMODEL_H
 #define MEDIAITEMMODEL_H
 
-#include <QAbstractItemModel>
+#include <QFileSystemModel>
 
 class MediaItemModel : public QAbstractItemModel
 {

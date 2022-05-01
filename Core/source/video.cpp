@@ -11,13 +11,13 @@ Video::Video(QString filePath)
     cv::Mat frame;
     video >> frame;
 
-    this->thumbnail = QPixmap::fromImage(utils::cvMatToQImage(utils::resizeSquarred(frame, Media::thumbnailSize)));
+    this->thumbnail = utils::cvMatToQImage(utils::resizeSquarred(frame, Media::thumbnailSize));
     video.release();
 
 }
 
 
-const QPixmap& Video::getThumbnail()
+const QImage& Video::getThumbnail()
 {
     return this->thumbnail;
 }

@@ -25,6 +25,7 @@ Media* Media::makeMedia(QString path)
     {
         return new Video(path);
     }
+    return nullptr;
 }
 
 void Media::setThumnailSize(int size)

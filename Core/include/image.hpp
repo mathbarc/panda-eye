@@ -2,19 +2,19 @@
 #define IMAGE_HPP
 
 #include "media.hpp"
-#include <QPixmap>
+#include <QImage>
 #include <opencv2/core/core.hpp>
 
 class Image : public Media
 {
     public:
         Image(QString path);
-        virtual const QPixmap& getThumbnail();
+        virtual const QImage& getThumbnail();
         virtual MediaType getType();
         static const QStringList filters;
 
     private:
-        QPixmap thumbnail;
+        QImage thumbnail;
 };
 
 #endif // IMAGE_HPP

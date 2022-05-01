@@ -66,8 +66,11 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::DecorationRole)
     {
-        const QPixmap& thumbnail = MediaCache::getInstance()->at(this->paths[index.row()])->getThumbnail();
-        return thumbnail;
+        Media* thumbnail = MediaCache::getInstance()->at(this->paths[index.row()]);
+        if(thumbnail != nullptr)
+            return thumbnail->getThumbnail();
+        else
+            return QVariant();
     }
     else if(role == MediaItemModel::FilePathRole)
     {
@@ -153,6 +156,7 @@ void MediaItemModel::setCurrentDir(const QModelIndex& index)
 bool MediaItemModel::hasChildren(const QModelIndex &parent) const
 {
     // FIXME: Implement me!
+    return false;
 }
 
 bool MediaItemModel::canFetchMore(const QModelIndex &parent) const

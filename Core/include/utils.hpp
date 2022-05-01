@@ -20,9 +20,9 @@ namespace utils
             img = img.rgbSwapped();
         }
         else
-            img = QImage(inputImg.ptr(), inputImg.cols, inputImg.rows, inputImg.step, QImage::Format_Mono);
+            img = QImage(inputImg.ptr(), inputImg.cols, inputImg.rows, inputImg.step, QImage::Format_Grayscale8);
 
-        return img;
+        return img.copy();
     }
 
 }

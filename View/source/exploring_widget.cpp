@@ -18,8 +18,9 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
     QFileSystemModel* model = new QFileSystemModel();
     QSortFilterProxyModel* sortedModel = new QSortFilterProxyModel();
     sortedModel->setSourceModel(model);
+    sortedModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
-    model->setRootPath(QDir::currentPath());
+    model->setRootPath(QDir::rootPath());
     model->setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
 
 
@@ -37,7 +38,6 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
 
 
     connect(this->ui->treeView, SIGNAL(clicked(QModelIndex)), mediaModel, SLOT(setCurrentDir(QModelIndex)));
-    this->ui->listView->setResizeMode(QListView::Adjust);
 
 }
 

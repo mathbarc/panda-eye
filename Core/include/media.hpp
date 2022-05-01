@@ -14,7 +14,7 @@ class Media
     public:
         Media(const std::string path);
         static Media* makeMedia(QString path);
-        virtual const QPixmap& getThumbnail() = 0;
+        virtual const QImage& getThumbnail() = 0;
         virtual MediaType getType() = 0;
 
         static void setThumnailSize(int size);
