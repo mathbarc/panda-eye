@@ -1,10 +1,9 @@
 #include "main_controller.hpp"
-
+#include <QResource>
 
 MainController::MainController()
 {
-
-
+    Q_INIT_RESOURCE(resource);
 }
 
 

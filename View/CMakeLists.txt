@@ -12,6 +12,8 @@ file(GLOB VIEW_FORMS ${CMAKE_CURRENT_SOURCE_DIR}/forms/*.ui)
 qt5_wrap_cpp(VIEW_WRAPPED_HEADERS ${VIEW_HEADERS})
 qt5_wrap_ui(VIEW_WRAPPED_UI ${VIEW_FORMS})
 
-add_library(View ${VIEW_SOURCES} ${VIEW_HEADERS} ${VIEW_WRAPPED_HEADERS} ${VIEW_WRAPPED_UI})
+qt5_add_resources(VIEW_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/resource/resource.qrc)
+
+add_library(View ${VIEW_SOURCES} ${VIEW_HEADERS} ${VIEW_WRAPPED_HEADERS} ${VIEW_WRAPPED_UI} ${VIEW_RESOURCES})
 target_link_libraries(View Core Qt5::Core Qt5::Widgets Qt5::Gui ${OpenCV_LIBRARIES})
 
