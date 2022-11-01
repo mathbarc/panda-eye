@@ -31,6 +31,12 @@ void MainWindow::openVideo(const QString& path)
 
 }
 
+void MainWindow::openFile(const QString& path)
+{
+    this->ui->exploring_widget->setCurrentDir(path);
+    this->openImage(path);
+}
+
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
 {
     if(index!=0)

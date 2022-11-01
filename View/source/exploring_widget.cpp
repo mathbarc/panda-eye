@@ -4,6 +4,7 @@
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
 #include <QStyle>
+#include <QFile>
 
 #include "media_item_model.hpp"
 #include "media_cache.hpp"
@@ -36,7 +37,6 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
 
     sortedModel->sort(0, Qt::AscendingOrder);
 
-
     connect(this->ui->treeView, SIGNAL(clicked(QModelIndex)), mediaModel, SLOT(setCurrentDir(QModelIndex)));
 
 }
@@ -65,4 +65,16 @@ void ExploringWidget::on_listView_doubleClicked(const QModelIndex &index)
     {
         emit openVideo(path);
     }
+}
+
+void ExploringWidget::setCurrentDir(const QString& path)
+{
+    QFileInfo file(path);
+    QString dir = file.dir().absolutePath();
+    QSortFilterProxyModel* proxyModel = dynamic_cast<QSortFilterProxyModel*>(this->ui->treeView->model());
+    QFileSystemModel* model = dynamic_cast<QFileSystemModel*>(proxyModel->sourceModel());
+    this->ui->treeView->setCurrentIndex(proxyModel->mapFromSource(model->index(dir)));
+
+    MediaItemModel* mediaModel = dynamic_cast<MediaItemModel*>(this->ui->listView->model());
+    mediaModel->setCurrentDir(dir);
 }

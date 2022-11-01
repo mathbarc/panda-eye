@@ -10,6 +10,7 @@ class MainController : public QObject
     public:
         MainController();
         void start();
+        void openFile(QString file = QString());
     private:
         MainWindow mainWindow;
 

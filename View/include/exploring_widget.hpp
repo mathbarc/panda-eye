@@ -19,11 +19,11 @@ class ExploringWidget : public QWidget
         void openImage(QString path);
         void openVideo(QString path);
 
+    public slots:
+        void setCurrentDir(const QString& path);
+
     private slots:
         void on_horizontalSlider_valueChanged(int value);
-
-
-
         void on_listView_doubleClicked(const QModelIndex &index);
 
 private:
