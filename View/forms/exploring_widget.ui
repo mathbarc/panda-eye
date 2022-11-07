@@ -110,6 +110,9 @@
        <property name="tabKeyNavigation">
         <bool>true</bool>
        </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::SingleSelection</enum>
        </property>
@@ -129,10 +132,13 @@
         <enum>QListView::Adjust</enum>
        </property>
        <property name="layoutMode">
-        <enum>QListView::Batched</enum>
+        <enum>QListView::SinglePass</enum>
+       </property>
+       <property name="spacing">
+        <number>0</number>
        </property>
        <property name="viewMode">
-        <enum>QListView::ListMode</enum>
+        <enum>QListView::IconMode</enum>
        </property>
        <property name="uniformItemSizes">
         <bool>true</bool>
@@ -141,10 +147,10 @@
         <number>100</number>
        </property>
        <property name="wordWrap">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="itemAlignment">
-        <set>Qt::AlignAbsolute|Qt::AlignBaseline|Qt::AlignBottom|Qt::AlignCenter|Qt::AlignHCenter|Qt::AlignHorizontal_Mask|Qt::AlignJustify|Qt::AlignLeading|Qt::AlignLeft|Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing|Qt::AlignVCenter|Qt::AlignVertical_Mask</set>
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>

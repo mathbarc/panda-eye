@@ -12,17 +12,14 @@ namespace utils
         if(aspectRatio>1)
         {
             int row = std::max((int)std::round(size/aspectRatio),1);
-
             cv::resize(img, resized, cv::Size(size, row));
-            return resized;
         }
         else
         {
             int col = std::max((int)std::round(size*aspectRatio),1);
-
             cv::resize(img, resized, cv::Size(col, size));
-            return resized;
         }
+        return resized;
 
 
     }
