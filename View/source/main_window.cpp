@@ -2,6 +2,8 @@
 #include "ui_main_window.h"
 #include "image_view_widget.hpp"
 
+#include <QFileInfo>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,7 +21,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::openImage(const QString& path)
 {
-
     ImageViewWidget* imgView = new ImageViewWidget();
     this->ui->tabWidget->addTab(imgView, path);
     this->ui->tabWidget->setCurrentWidget(imgView);

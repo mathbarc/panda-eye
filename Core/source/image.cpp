@@ -13,7 +13,7 @@ Image::Image(QString path)
     cv::Mat img;
     if(path.contains(".tiff"))
     {
-        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
+        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH | cv::IMREAD_UNCHANGED);
 
         if(originalImg.type() == CV_32FC3)
             originalImg.convertTo(img, CV_8UC3);

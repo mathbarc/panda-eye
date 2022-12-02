@@ -1,5 +1,6 @@
 #include "main_controller.hpp"
 #include <QResource>
+#include <QFileInfo>
 
 MainController::MainController()
 {
@@ -16,6 +17,10 @@ void MainController::openFile(QString file)
 {
     if(!file.isEmpty())
     {
-        this->mainWindow.openFile(file);
+        QFileInfo fileInfo(file);
+        if(!fileInfo.isDir())
+        {
+            this->mainWindow.openFile(file);
+        }
     }
 }
