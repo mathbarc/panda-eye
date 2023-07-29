@@ -4,6 +4,9 @@
 #include "media.hpp"
 #include <QImage>
 #include <opencv2/core/core.hpp>
+#include <dcmtk/config/osconfig.h>
+#include <dcmtk/dcmdata/dctk.h>
+#include <dcmtk/dcmimgle/dcmimage.h>
 
 class Image : public Media
 {
