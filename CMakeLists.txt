@@ -1,6 +1,6 @@
-project("PandaEye")
 cmake_minimum_required(VERSION 3.12)
 
+project("PandaEye")
 
 option(ENABLE_DCMTK "Add DCMTK to Read DICOM Image" OFF)
 if (${ENABLE_DCMTK})
