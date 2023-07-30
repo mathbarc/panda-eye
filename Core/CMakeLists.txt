@@ -3,7 +3,7 @@ find_package(OpenCV COMPONENTS core imgcodecs videoio REQUIRED)
 
 
 set(CORE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "View include dir")
-include_directories( ${OpenCV_INCLUDE_DIRS} ${CORE_INCLUDE_DIR})
+include_directories(${OpenCV_INCLUDE_DIRS} ${CORE_INCLUDE_DIR})
 
 file(GLOB CORE_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
 file(GLOB CORE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
