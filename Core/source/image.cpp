@@ -25,15 +25,6 @@ Image::Image(QString path)
         } else
             img = originalImg;
     }
-
-#ifdef __DICOM__
-        else if(path.contains(".dcm"))
-        {
-
-            cv::Mat dicomImage =  cv::imread(this-> path);
-            dicomImage.copyTo(img);
-        }
-#endif
     else {
         img = cv::imread(this->path);
     }
