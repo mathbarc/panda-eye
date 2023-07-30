@@ -6,7 +6,7 @@
 
 const QStringList Image::filters =
         QStringList() << "*.jpg" << "*.JPG" << "*.jpeg" << "*.JPEG" << "*.png" << "*.PNG" << "*.tiff" << "*.TIFF"
-                      << "*.bmp" << "*.BMP" << "*.dcm" << "*.dcm";
+                      << "*.bmp" << "*.BMP" << "*.dcm" << "*.DCM";
 
 
 Image::Image(QString path)
