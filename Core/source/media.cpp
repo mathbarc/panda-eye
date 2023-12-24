@@ -1,22 +1,34 @@
 #include "media.hpp"
+
+#include <QFileInfo>
+
 #include "image.hpp"
 #include "video.hpp"
 
-#include <QFileInfo>
+#include <QDebug>
+
+
+MediaNotFound::MediaNotFound(QString path)
+    : message("Media: "+path.toStdString()+" could not be opened")
+{}
+
+const char* MediaNotFound::what() const
+{
+    return this->message.c_str();
+}
 
 
 int Media::thumbnailSize = 200;
 
 Media::Media(const std::string path)
     : path(path)
-{
-
-}
+{}
 
 
 Media* Media::makeMedia(QString path)
 {
     QFileInfo info(path);
+
     if(Image::filters.contains("*."+info.suffix()))
     {
         return new Image(path);
@@ -25,6 +37,7 @@ Media* Media::makeMedia(QString path)
     {
         return new Video(path);
     }
+
     return nullptr;
 }
 

@@ -1,9 +1,9 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <iostream>
 #include <opencv2/core/core.hpp>
 #include <QImage>
-#include <iostream>
 
 namespace utils {
 

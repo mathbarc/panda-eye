@@ -1,11 +1,15 @@
 #include "image.hpp"
 
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgcodecs/imgcodecs.hpp>
+#include "utils.hpp"
 
-#include "dcmtk/dcmdata/libi2d/i2dplsc.h"
+
+
 
 
 const QStringList Image::filters =
-        QStringList() << "*.jpg" << "*.JPG" << "*.jpeg" << "*.JPEG" << "*.png" << "*.PNG" << "*.tiff" << "*.TIFF"
+        QStringList() << "*.jpg" << "*.JPG" << "*.jpeg" << "*.JPEG" << "*.png" << "*.PNG" << "*.tif" << "*.tiff" << "*.TIFF"
                       << "*.bmp" << "*.BMP" << "*.dcm" << "*.DCM";
 
 
@@ -13,8 +17,8 @@ Image::Image(QString path)
         : Media(path.toStdString()) {
 
     cv::Mat img;
-    if (path.contains(".tiff")) {
-        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH | cv::IMREAD_UNCHANGED);
+    if (path.contains(".tif") || path.contains(".tiff")) {
+        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH | cv::IMREAD_LOAD_GDAL);
 
         if (originalImg.type() == CV_32FC3)
             originalImg.convertTo(img, CV_8UC3);
@@ -25,8 +29,17 @@ Image::Image(QString path)
         } else
             img = originalImg;
     }
+    else if(path.contains(".dcm") || path.contains(".DCM")){
+        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
+        img = originalImg;
+    }
     else {
         img = cv::imread(this->path);
+    }
+
+    if(img.empty())
+    {
+        throw MediaNotFound(path);
     }
 
     cv::Mat resizedImg = utils::resizeSquarred(img, Media::thumbnailSize);

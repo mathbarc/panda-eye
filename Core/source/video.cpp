@@ -1,6 +1,10 @@
 #include "video.hpp"
-#include "utils.hpp"
+
 #include <QImage>
+#include <opencv2/videoio/videoio.hpp>
+
+#include "utils.hpp"
+
 
 const QStringList Video::filters = QStringList() << "*.mpeg"<< "*.MPEG" << "*.mp4" << "*.MP4" << "*.avi" << "*.avi" <<"*.mkv"<<"*.MKV"<<"*.mov"<<"*.MOV";
 
@@ -8,6 +12,12 @@ Video::Video(QString filePath)
     : Media(filePath.toStdString())
 {
     cv::VideoCapture video(this->path, cv::CAP_FFMPEG);
+
+    if(!video.isOpened())
+    {
+        throw MediaNotFound(filePath);
+    }
+
     cv::Mat frame;
     video >> frame;
 
