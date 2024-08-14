@@ -1,10 +1,9 @@
 #ifndef VIDEO_HPP
 #define VIDEO_HPP
 
-#include "media.hpp"
 #include <QPixmap>
 
-#include <opencv2/videoio/videoio.hpp>
+#include "media.hpp"
 
 class Video : public Media
 {

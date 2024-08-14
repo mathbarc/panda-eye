@@ -1,9 +1,9 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-#include "media.hpp"
 #include <QImage>
-#include <opencv2/core/core.hpp>
+
+#include "media.hpp"
 
 class Image : public Media
 {

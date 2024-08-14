@@ -1,13 +1,13 @@
 #include "media_item_model.hpp"
-#include <QDir>
+
 #include <iostream>
-
+#include <QDir>
 #include <QFileSystemModel>
-
-#include "media_cache.hpp"
+#include <QtDebug>
 
 #include "image.hpp"
 #include "video.hpp"
+#include "media_cache.hpp"
 
 MediaItemModel::MediaItemModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -66,11 +66,21 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::DecorationRole)
     {
-        Media* thumbnail = MediaCache::getInstance()->at(this->paths[index.row()]);
-        if(thumbnail != nullptr)
-            return thumbnail->getThumbnail();
-        else
-            return QVariant();
+
+        try
+        {
+            Media* thumbnail = MediaCache::getInstance()->at(this->paths[index.row()]);
+            if(thumbnail != nullptr)
+                return thumbnail->getThumbnail();
+            else
+                return QVariant();
+        }
+        catch (MediaNotFound e)
+        {
+            qDebug()<<e.what();
+        }
+        return QVariant();
+
     }
     else if(role == MediaItemModel::FilePathRole)
     {

@@ -1,10 +1,10 @@
 #ifndef MEDIACACHE_HPP
 #define MEDIACACHE_HPP
 
-#include "media.hpp"
-
 #include <QCache>
 #include <QSharedPointer>
+
+#include "media.hpp"
 
 class MediaCache
 {

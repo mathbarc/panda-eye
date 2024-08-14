@@ -1,32 +1,46 @@
 #include "image.hpp"
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs/imgcodecs.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
 #include "utils.hpp"
 
-const QStringList Image::filters = QStringList() << "*.jpg" << "*.JPG" << "*.jpeg" << "*.JPEG" <<"*.png"<<"*.PNG"<<"*.tiff"<<"*.TIFF";
+
+
+
+
+const QStringList Image::filters =
+        QStringList() << "*.jpg" << "*.JPG" << "*.jpeg" << "*.JPEG" << "*.png" << "*.PNG" << "*.tif" << "*.tiff" << "*.TIFF"
+                      << "*.bmp" << "*.BMP" << "*.dcm" << "*.DCM";
+
 
 Image::Image(QString path)
-    : Media(path.toStdString())
-{
+        : Media(path.toStdString()) {
 
     cv::Mat img;
-    if(path.contains(".tiff"))
-    {
-        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH | cv::IMREAD_UNCHANGED);
+    if (path.contains(".tif") || path.contains(".tiff")) {
+        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH | cv::IMREAD_LOAD_GDAL);
 
-        if(originalImg.type() == CV_32FC3)
+        if (originalImg.type() == CV_32FC3)
             originalImg.convertTo(img, CV_8UC3);
-        else if(originalImg.type() == CV_32F)
-        {
+        else if (originalImg.type() == CV_32F) {
             double min, max;
             cv::minMaxIdx(originalImg, &min, &max);
-            originalImg.convertTo(img, CV_8U, 255./(max-min), 255.*(-min)/(max-min));
-        }
-        else
+            originalImg.convertTo(img, CV_8U, 255. / (max - min), 255. * (-min) / (max - min));
+        } else
             img = originalImg;
     }
-    else  img = cv::imread(this->path);
+    else if(path.contains(".dcm") || path.contains(".DCM")){
+        cv::Mat originalImg = cv::imread(this->path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
+        img = originalImg;
+    }
+    else {
+        img = cv::imread(this->path);
+    }
+
+    if(img.empty())
+    {
+        throw MediaNotFound(path);
+    }
 
     cv::Mat resizedImg = utils::resizeSquarred(img, Media::thumbnailSize);
 
@@ -38,13 +52,11 @@ Image::Image(QString path)
 }
 
 
-const QImage &Image::getThumbnail()
-{
+const QImage &Image::getThumbnail() {
     return this->thumbnail;
 }
 
-MediaType Image::getType()
-{
+MediaType Image::getType() {
     return MediaType::Image;
 }
 

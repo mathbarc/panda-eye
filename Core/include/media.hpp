@@ -1,7 +1,21 @@
 #ifndef MEDIA_HPP
 #define MEDIA_HPP
 
+#include <string>
+#include <exception>
+
 #include <QSharedPointer>
+
+class MediaNotFound
+{
+    public:
+        MediaNotFound(QString path);
+        const char* what() const;
+
+    private:
+        const std::string message;
+
+};
 
 enum class MediaType
 {
