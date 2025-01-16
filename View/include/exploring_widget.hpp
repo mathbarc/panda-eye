@@ -3,31 +3,32 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
     class ExploringWidget;
 }
 
 class ExploringWidget : public QWidget
 {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        explicit ExploringWidget(QWidget *parent = nullptr);
-        ~ExploringWidget();
+  public:
+    explicit ExploringWidget(QWidget *parent = nullptr);
+    ~ExploringWidget();
 
-    signals:
-        void openImage(QString path);
-        void openVideo(QString path);
+  signals:
+    void openImage(QString path);
+    void openVideo(QString path);
 
-    public slots:
-        void setCurrentDir(const QString& path);
+  public slots:
+    void setCurrentDir(const QString &path);
 
-    private slots:
-        void on_horizontalSlider_valueChanged(int value);
-        void on_listView_doubleClicked(const QModelIndex &index);
+  private slots:
+    void on_horizontalSlider_valueChanged(int value);
+    void on_listView_doubleClicked(const QModelIndex &index);
 
-private:
-        Ui::ExploringWidget *ui;
+  private:
+    Ui::ExploringWidget *ui;
 };
 
 #endif // EXPLORING_WIDGET_HPP

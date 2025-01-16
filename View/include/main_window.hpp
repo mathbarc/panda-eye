@@ -3,29 +3,29 @@
 
 #include <QMainWindow>
 
-namespace Ui {
+namespace Ui
+{
     class MainWindow;
 }
 
 class MainWindow : public QMainWindow
 {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        explicit MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
+  public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    public slots:
-        void openFile(const QString& path);
-        void openImage(const QString& path);
-        void openVideo(const QString& path);
+  public slots:
+    void openFile(const QString &path);
+    void openImage(const QString &path);
+    void openVideo(const QString &path);
 
-    private slots:
-        void on_tabWidget_tabCloseRequested(int index);
+  private slots:
+    void on_tabWidget_tabCloseRequested(int index);
 
-private:
-        Ui::MainWindow *ui;
-
+  private:
+    Ui::MainWindow *ui;
 };
 
 #endif // MAIN_WINDOW_HPP

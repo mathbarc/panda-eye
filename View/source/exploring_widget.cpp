@@ -1,29 +1,26 @@
 #include "exploring_widget.hpp"
 #include "ui_exploring_widget.h"
 
+#include <QFile>
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
 #include <QStyle>
-#include <QFile>
 
-#include "media_item_model.hpp"
 #include "media_cache.hpp"
+#include "media_item_model.hpp"
 
-ExploringWidget::ExploringWidget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ExploringWidget)
+ExploringWidget::ExploringWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ExploringWidget)
 {
     ui->setupUi(this);
     this->ui->tabWidget->setHidden(true);
 
-    QFileSystemModel* model = new QFileSystemModel();
-    QSortFilterProxyModel* sortedModel = new QSortFilterProxyModel();
+    QFileSystemModel *model = new QFileSystemModel();
+    QSortFilterProxyModel *sortedModel = new QSortFilterProxyModel();
     sortedModel->setSourceModel(model);
     sortedModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
     model->setRootPath(QDir::rootPath());
-    model->setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
-
+    model->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
 
     this->ui->treeView->setModel(sortedModel);
     this->ui->treeView->hideColumn(1);
@@ -31,14 +28,13 @@ ExploringWidget::ExploringWidget(QWidget *parent) :
     this->ui->treeView->hideColumn(3);
     this->ui->treeView->setCurrentIndex(sortedModel->mapFromSource(model->index(QDir::currentPath())));
 
-    MediaItemModel* mediaModel = new MediaItemModel();
+    MediaItemModel *mediaModel = new MediaItemModel();
     this->ui->listView->setModel(mediaModel);
     mediaModel->setCurrentDir(QDir::currentPath());
 
     sortedModel->sort(0, Qt::AscendingOrder);
 
     connect(this->ui->treeView, SIGNAL(clicked(QModelIndex)), mediaModel, SLOT(setCurrentDir(QModelIndex)));
-
 }
 
 ExploringWidget::~ExploringWidget()
@@ -67,14 +63,14 @@ void ExploringWidget::on_listView_doubleClicked(const QModelIndex &index)
     }
 }
 
-void ExploringWidget::setCurrentDir(const QString& path)
+void ExploringWidget::setCurrentDir(const QString &path)
 {
     QFileInfo file(path);
     QString dir = file.dir().absolutePath();
-    QSortFilterProxyModel* proxyModel = dynamic_cast<QSortFilterProxyModel*>(this->ui->treeView->model());
-    QFileSystemModel* model = dynamic_cast<QFileSystemModel*>(proxyModel->sourceModel());
+    QSortFilterProxyModel *proxyModel = dynamic_cast<QSortFilterProxyModel *>(this->ui->treeView->model());
+    QFileSystemModel *model = dynamic_cast<QFileSystemModel *>(proxyModel->sourceModel());
     this->ui->treeView->setCurrentIndex(proxyModel->mapFromSource(model->index(dir)));
 
-    MediaItemModel* mediaModel = dynamic_cast<MediaItemModel*>(this->ui->listView->model());
+    MediaItemModel *mediaModel = dynamic_cast<MediaItemModel *>(this->ui->listView->model());
     mediaModel->setCurrentDir(dir);
 }

@@ -7,13 +7,13 @@
 
 class Video : public Media
 {
-public:
+  public:
     Video(QString filePath);
-    virtual const QImage& getThumbnail();
+    virtual const QImage &getThumbnail();
     virtual MediaType getType();
     static const QStringList filters;
 
-private:
+  private:
     QImage thumbnail;
 };
 

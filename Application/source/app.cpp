@@ -1,15 +1,14 @@
-#include <QApplication>
 #include "main_controller.hpp"
+#include <QApplication>
 
-
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
     MainController controller;
     controller.start();
 
-    if(argc>1)
+    if(argc > 1)
     {
         controller.openFile(argv[1]);
     }

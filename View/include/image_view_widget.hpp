@@ -3,24 +3,24 @@
 
 #include <QWidget>
 
-namespace Ui {
-class ImageViewWidget;
+namespace Ui
+{
+    class ImageViewWidget;
 }
 
 class ImageViewWidget : public QWidget
 {
     Q_OBJECT
 
-public:
+  public:
     explicit ImageViewWidget(QWidget *parent = nullptr);
     ~ImageViewWidget();
 
-public slots:
-    void setImage(const QString& path);
+  public slots:
+    void setImage(const QString &path);
 
-private:
-
-    void setImageOnScene(const QPixmap& pixmap);
+  private:
+    void setImageOnScene(const QPixmap &pixmap);
     Ui::ImageViewWidget *ui;
 };
 

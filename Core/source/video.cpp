@@ -5,11 +5,10 @@
 
 #include "utils.hpp"
 
+const QStringList Video::filters = QStringList() << "*.mpeg" << "*.MPEG" << "*.mp4" << "*.MP4" << "*.avi" << "*.avi"
+                                                 << "*.mkv" << "*.MKV" << "*.mov" << "*.MOV";
 
-const QStringList Video::filters = QStringList() << "*.mpeg"<< "*.MPEG" << "*.mp4" << "*.MP4" << "*.avi" << "*.avi" <<"*.mkv"<<"*.MKV"<<"*.mov"<<"*.MOV";
-
-Video::Video(QString filePath)
-    : Media(filePath.toStdString())
+Video::Video(QString filePath) : Media(filePath.toStdString())
 {
     cv::VideoCapture video(this->path, cv::CAP_FFMPEG);
 
@@ -23,20 +22,17 @@ Video::Video(QString filePath)
 
     if(frame.empty())
     {
-        frame = cv::Mat::zeros(cv::Size(200,200),CV_8UC3);
+        frame = cv::Mat::zeros(cv::Size(200, 200), CV_8UC3);
     }
 
     this->thumbnail = utils::cvMatToQImage(utils::resizeSquarred(frame, Media::thumbnailSize));
     video.release();
-
 }
 
-
-const QImage& Video::getThumbnail()
+const QImage &Video::getThumbnail()
 {
     return this->thumbnail;
 }
-
 
 MediaType Video::getType()
 {

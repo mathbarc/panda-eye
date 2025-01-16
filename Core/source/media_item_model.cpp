@@ -1,86 +1,69 @@
 #include "media_item_model.hpp"
 
-#include <iostream>
 #include <QDir>
 #include <QFileSystemModel>
 #include <QtDebug>
+#include <iostream>
 
 #include "image.hpp"
-#include "video.hpp"
 #include "media_cache.hpp"
+#include "video.hpp"
 
-MediaItemModel::MediaItemModel(QObject *parent)
-    : QAbstractItemModel(parent)
+MediaItemModel::MediaItemModel(QObject *parent) : QAbstractItemModel(parent)
 {
 }
 
-
 QVariant MediaItemModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    // FIXME: Implement me!
-    if( role != Qt::DisplayRole )
+    if(role != Qt::DisplayRole)
         return QVariant();
-    return section+1;
+    return section + 1;
 }
 
 QModelIndex MediaItemModel::index(int row, int column, const QModelIndex &parent) const
 {
-    // FIXME: Implement me!
     if(row >= 0 && row < this->paths.size() && column == 0)
         return this->createIndex(row, column, parent.internalPointer());
-    else return QModelIndex();
+    else
+        return QModelIndex();
 }
 
 QModelIndex MediaItemModel::parent(const QModelIndex &index) const
 {
-    // FIXME: Implement me!
     return QModelIndex();
 }
 
 int MediaItemModel::rowCount(const QModelIndex &parent) const
 {
-//    if (!parent.isValid())
-//        return 0;
-
     return this->paths.size();
-
-    // FIXME: Implement me!
 }
 
 int MediaItemModel::columnCount(const QModelIndex &parent) const
 {
-//    if (!parent.isValid())
-//        return 0;
-
     return 1;
-
-    // FIXME: Implement me!
 }
 
 QVariant MediaItemModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if(!index.isValid())
         return QVariant();
-
-
 
     if(role == Qt::DecorationRole)
     {
 
         try
         {
-            Media* thumbnail = MediaCache::getInstance()->at(this->paths[index.row()]);
+            Media *thumbnail = MediaCache::getInstance()->at(this->paths[index.row()]);
             if(thumbnail != nullptr)
                 return thumbnail->getThumbnail();
             else
                 return QVariant();
         }
-        catch (MediaNotFound e)
+        catch(MediaNotFound e)
         {
-            qDebug()<<e.what();
+            qDebug() << e.what();
         }
         return QVariant();
-
     }
     else if(role == MediaItemModel::FilePathRole)
     {
@@ -90,10 +73,9 @@ QVariant MediaItemModel::data(const QModelIndex &index, int role) const
     {
         return int(MediaCache::getInstance()->at(this->paths[index.row()])->getType());
     }
-    else return QVariant();
-
+    else
+        return QVariant();
 }
-
 
 /*
 bool MediaItemModel::insertRows(int row, int count, const QModelIndex &parent)
@@ -125,18 +107,16 @@ bool MediaItemModel::removeColumns(int column, int count, const QModelIndex &par
 }
 
 */
-void MediaItemModel::setCurrentDir(const QString& dir)
+void MediaItemModel::setCurrentDir(const QString &dir)
 {
     QDir directory(dir);
-    QStringList newPaths = directory.entryList(Image::filters+Video::filters, QDir::Files);
-    for(QString& filePath: newPaths)
+    QStringList newPaths = directory.entryList(Image::filters + Video::filters, QDir::Files);
+    for(QString &filePath : newPaths)
     {
-        filePath = dir+QDir::separator()+filePath;
+        filePath = dir + QDir::separator() + filePath;
     }
 
-
     int diff = newPaths.size() - this->paths.size();
-
 
     if(diff < 0)
     {
@@ -150,28 +130,24 @@ void MediaItemModel::setCurrentDir(const QString& dir)
         QAbstractItemModel::insertRows(this->paths.size(), diff);
     }
 
-    QModelIndex start = this->index(0,0);
+    QModelIndex start = this->index(0, 0);
     QModelIndex end = this->index(this->rowCount(), this->columnCount());
 
     QAbstractItemModel::dataChanged(start, end);
-
 }
 
-void MediaItemModel::setCurrentDir(const QModelIndex& index)
+void MediaItemModel::setCurrentDir(const QModelIndex &index)
 {
     this->setCurrentDir(index.data(QFileSystemModel::FilePathRole).toString());
 }
 
-
 bool MediaItemModel::hasChildren(const QModelIndex &parent) const
 {
-    // FIXME: Implement me!
     return false;
 }
 
 bool MediaItemModel::canFetchMore(const QModelIndex &parent) const
 {
-    // FIXME: Implement me!
     return false;
 }
 
