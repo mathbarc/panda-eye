@@ -2,15 +2,16 @@
 #define MEDIA_HPP
 
 #include <exception>
+#include <stdexcept>
 #include <string>
 
 #include <QSharedPointer>
 
-class MediaNotFound
+class MediaNotFound : public std::exception
 {
   public:
     MediaNotFound(QString path);
-    const char *what() const;
+    virtual const char *what() const noexcept;
 
   private:
     const std::string message;

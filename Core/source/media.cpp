@@ -11,7 +11,7 @@ MediaNotFound::MediaNotFound(QString path) : message("Media: " + path.toStdStrin
 {
 }
 
-const char *MediaNotFound::what() const
+const char *MediaNotFound::what() const noexcept
 {
     return this->message.c_str();
 }
